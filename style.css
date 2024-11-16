@@ -1,0 +1,63 @@
+
+.mainContent{
+    display: grid;
+    grid-template-columns: 1fr 5fr 1fr;
+    grid-template-rows: 1.5fr 5fr 1fr;
+    height: 75vh;
+    margin: 0;
+    gap: 5px;
+}
+.mainContent > div{
+    border: 5px solid black;
+}
+.topMidPanel{
+    grid-column: 2 / 3;
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    grid-template-rows: 2fr 1fr;
+}
+p1, p2{
+    margin: 10px;
+    align-self: end;
+}
+.title{
+    grid-column: 1 / 4;
+    grid-row: 1 / 2;
+    justify-self: center;
+    align-self: center;
+}
+.gameButtons{
+    align-self: end;
+    justify-self: center;
+    margin-bottom: 30px;
+}
+.gameBoard{
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    padding: 25px 100px 25px 100px;
+    gap: 5px;
+    background-color: purple;
+    
+}
+.gameBoard > div{
+    border: 2px solid red;
+    /* background-color: blueviolet; */
+    color: transparent;
+    display: grid;
+    
+}
+.bottomMidPanel{
+    grid-column: 2 / 3;
+    grid-row: 3 / 4;
+}
+
+.cross{
+    background: url(./images/x.svg) no-repeat scroll 50% 50%;    
+
+}
+.circle{
+    background: url(./images/o.svg) no-repeat scroll 50% 50%;
+}
