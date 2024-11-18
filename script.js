@@ -1,7 +1,9 @@
-let user1 = "tay";
-let user2 = "bob";
+// let user1 = "tay";
+// let user2 = "bob";
 
-let game = tikTakToe(user1, user2);
+let game;
+let gameRunning = false;
+
 
 function tikTakToe(name1, name2){
     const user = createPlayer(name1, name2);
@@ -43,33 +45,13 @@ function tikTakToe(name1, name2){
             gameBoard.push(`${i}e`);
         }
     }
-    // function playGame(){
-    //     while ((winner != 1) && (winner != 2) && (winner != 3)){
-    //         let position = prompt(`${showBoardState()} choose move`);
-    //         playerMove(position);
-    //     }
-    //     if (winner == 1){
-            
-    //         alert (`${user.getName1()} wins!`);
-    //     }
-    //     else if (winner == 2){
-            
-    //         alert(`${user.getName2()} wins!`);
-    //     }
-    //     else if (winner == 3){
-    //         alert(`Draw!`);
-    //     }
-    // }
+
 
     function overlapCheck(position){
         if (gameBoard[position-1] == ' x' || gameBoard[position-1] == ' O'){
-            let checker = true;
-            
             return true;
         }
         else {
-            let checker = false;
-            
             return false;
         }
     }
@@ -177,10 +159,13 @@ function tikTakToe(name1, name2){
         
     }
 
-    
-
     function showBoardState(){
         console.log (`${gameBoard[0]} | ${gameBoard[1]} | ${gameBoard[2]}\n${gameBoard[3]} | ${gameBoard[4]} | ${gameBoard[5]}\n${gameBoard[6]} | ${gameBoard[7]} | ${gameBoard[8]}`)
+    }
+
+    function addMove(move){
+        let mark = checkWhoseTurn();
+        
     }
 
     return Object.assign({},{getBoardState, playerMove, showBoardState, checkWhoseTurn, overlapCheck, winConditionCheck, resetBoard}, user)
@@ -204,8 +189,9 @@ placeMarker.forEach((square) =>{
         let move = parseInt(e.target.getAttribute("boxNo"));
         let mark = game.checkWhoseTurn();
         if ( game.winConditionCheck(game.getBoardState()) != 0){
-            return;
+            return;   
         }
+        // Doesn't allow moves if the game is already done
         if (!game.overlapCheck(move)){
             if (mark == ' x'){
                 e.target.classList.add("cross");
@@ -226,6 +212,11 @@ placeMarker.forEach((square) =>{
 
 const resetBtn = document.querySelector('.resetGame');
 resetBtn.addEventListener('click', function(){
+
+    return resetFunction();
+});
+
+function resetFunction(){
     const selectBoard = document.querySelectorAll('.gameBoard > div');
     selectBoard.forEach((section) =>{
         section.classList.remove('circle');
@@ -233,6 +224,34 @@ resetBtn.addEventListener('click', function(){
 
     })
     game.resetBoard();
-});
+}
+
+const startBtn = document.querySelector('.startGame');
+startBtn.addEventListener('click', function(){
+    let confirmation = false;
+    if (gameRunning == true){
+        confirmation = confirm('Do you want to start again?');
+        console.log(confirmation);
+        if (confirmation == true){
+            console.log('asdf');
+            resetFunction();            
+        }
+    }
+   
+    gameRunning = true;
+    let p1 = document.querySelector('.name1').value;
+    if (p1 == ''){
+        p1 = 'noname';
+    }
+    let p2 = document.querySelector('.name2').value;
+    if (p2 == ''){
+        p2 = 'noname';
+    }
+    if (typeof game != 'object'){
+        game = tikTakToe(p1,p2);
+    }
+    
+    
+})
 
 
