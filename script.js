@@ -2,7 +2,7 @@
 // let user2 = "bob";
 
 let game;
-let gameRunning = false;
+
 
 
 function tikTakToe(name1, name2){
@@ -26,14 +26,18 @@ function tikTakToe(name1, name2){
             winner = winConditionCheck(gameBoard);
             if (winner == 1){
                 
-                alert (`${user.getName1()} wins!`);
+                // alert (`${user.getName1()} wins!`);
+                document.querySelector('.bottomMidPanel').textContent = `${user.getName1()} wins!`
             }
             else if (winner == 2){
                 
-                alert(`${user.getName2()} wins!`);
+                // alert(`${user.getName2()} wins!`);
+                document.querySelector('.bottomMidPanel').textContent = `${user.getName2()} wins!`
             }
             else if (winner == 3){
-                alert(`Draw!`);
+                // setTimeout(()=> alert(`Draw!`), 10)
+                document.querySelector('.bottomMidPanel').textContent = `DRAW!`
+                
             }
         }
 
@@ -44,6 +48,7 @@ function tikTakToe(name1, name2){
         for(let i=1;i<10;++i){
             gameBoard.push(`${i}e`);
         }
+        document.querySelector('.bottomMidPanel').textContent = ``;
     }
 
 
@@ -163,10 +168,7 @@ function tikTakToe(name1, name2){
         console.log (`${gameBoard[0]} | ${gameBoard[1]} | ${gameBoard[2]}\n${gameBoard[3]} | ${gameBoard[4]} | ${gameBoard[5]}\n${gameBoard[6]} | ${gameBoard[7]} | ${gameBoard[8]}`)
     }
 
-    function addMove(move){
-        let mark = checkWhoseTurn();
-        
-    }
+
 
     return Object.assign({},{getBoardState, playerMove, showBoardState, checkWhoseTurn, overlapCheck, winConditionCheck, resetBoard}, user)
 };
@@ -228,17 +230,8 @@ function resetFunction(){
 
 const startBtn = document.querySelector('.startGame');
 startBtn.addEventListener('click', function(){
-    let confirmation = false;
-    if (gameRunning == true){
-        confirmation = confirm('Do you want to start again?');
-        console.log(confirmation);
-        if (confirmation == true){
-            console.log('asdf');
-            resetFunction();            
-        }
-    }
-   
-    gameRunning = true;
+    
+
     let p1 = document.querySelector('.name1').value;
     if (p1 == ''){
         p1 = 'noname';
@@ -250,6 +243,12 @@ startBtn.addEventListener('click', function(){
     if (typeof game != 'object'){
         game = tikTakToe(p1,p2);
     }
+    document.querySelector('.name2').disabled = 'true';
+    document.querySelector('.name1').disabled = 'true';
+    document.querySelector('.startGame').style.visibility = 'hidden';
+    document.getElementsByClassName('.startGame').disabled = 'true';
+
+
     
     
 })
